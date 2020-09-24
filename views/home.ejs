@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <%=locals.title %>
+        </title>
+        <link type="text/css" rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <h1><i class="fas fa-address-book" style="margin-right: 10px;"></i><%= locals.heading %></h1>
+        <% if(locals.contact_list.length==0){%>
+            <p>Contact doesnot Exist</p>    
+        <% } else { %>
+            <ul>
+                <% for(let i of contact_list){%>
+                    <li class="list">
+                        <div class="left"><%= i.name %></div>
+                        <div style="display: flex;">
+                            <div class="right"><%= i.phone %></div>
+                            <a href="/delete-contact/?id=<%= i._id %>">
+                                <i class="far fa-times-circle" style="margin-left: 10px; color: red; cursor: pointer;"></i>
+                            </a>
+                        </div>
+                    </li>
+                <% } %>
+            </ul>
+        <% } %>
+
+        <hr/>
+        <form action="/create-contact" method="POST">
+            <input name="name" placeholder="Contact Name" required>
+            <input name="phone" placeholder="Contact No" required>
+            <button type="submit">Add Contact</button>
+        </form>
+
+        <script type="text/javascript" src="/js/home.js"></script>
+        <script src="https://kit.fontawesome.com/e16cc44bff.js" crossorigin="anonymous"></script>
+    </body>
+</html>
